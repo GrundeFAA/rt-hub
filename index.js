@@ -4,7 +4,7 @@ const pokemon = require("./pokemon.json");
 
 const app = express();
 const PORT = 3000;
-console.log(pokemon.length);
+
 // add middlewares
 // app.use(express.static(path.join(__dirname, "..", "rt-hub/build")));
 // app.use(express.static("public"));
