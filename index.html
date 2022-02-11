@@ -8,5 +8,15 @@
   </head>
   <body>
     <h1>Hello world</h1>
+    <p>Last inn alle pokemonene!</p>
+    <button onclick="getData()">Click me</button>
+    <script>
+      async function getData() {
+        console.log("test");
+        fetch(window.location.pathname + "pokemon")
+          .then((res) => res.json())
+          .then((_data) => console.log(_data));
+      }
+    </script>
   </body>
 </html>
