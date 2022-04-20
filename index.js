@@ -1,6 +1,9 @@
 const express = require("express");
+
 const path = require("path");
-const pokemon = require("./pokemon.json");
+
+const gqlFetch = require("./utils/gql/gqlFetch");
+const { queryProducts } = require("./utils/gql/queries");
 
 const app = express();
 const PORT = 3000;
@@ -18,8 +21,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.get("/pokemon", (req, res) => {
-  res.json(pokemon);
+app.get("/pokemon", async (req, res) => {
+  let data = await gqlFetch(queryProducts);
+  console.log(data);
+  res.end();
 });
 
 app.listen(PORT, () => {
