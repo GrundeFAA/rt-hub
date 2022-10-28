@@ -1,30 +1,25 @@
 const express = require("express");
 
-const path = require("path");
-
-const gqlFetch = require("./utils/gql/gqlFetch");
-const { queryProducts } = require("./utils/gql/queries");
-
+const schedule = require("node-schedule");
 const app = express();
 const PORT = 3000;
 
-// add middlewares
-// app.use(express.static(path.join(__dirname, "..", "rt-hub/build")));
-// app.use(express.static("public"));
-//
-// app.use((req, res, next) => {
-//   res.sendFile(path.join(__dirname, "..", "build", "index.html"));
-//   next();
-// });
+const arrayOfJobs = [];
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+schedule.scheduleJob("* */1 * * * *", () => {
+  const largeDataSet = {
+    lots: "of data",
+  };
+  console.log("scheduled job running");
+  const job = {
+    time: new Date(),
+    data: largeDataSet,
+  };
+  arrayOfJobs.push(job);
 });
 
-app.get("/pokemon", async (req, res) => {
-  let data = await gqlFetch(queryProducts);
-  console.log(data);
-  res.end();
+app.get("/jobs", (req, res) => {
+  res.json(arrayOfJobs);
 });
 
 app.listen(PORT, () => {
