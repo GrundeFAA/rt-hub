@@ -3,15 +3,22 @@ const schedule = require("node-schedule");
 const app = express();
 const PORT = 3000;
 
-const arrayOfJobs = [];
+const arrayOfJobs = [
+  {
+    time: new Date().toLocaleString("en-GB"),
+    data: (largeDataSet = {
+      lots: "of data",
+    }),
+  },
+];
 
-schedule.scheduleJob("0 */1 * * * *", () => {
+schedule.scheduleJob("*/30 * * * * *", () => {
   const largeDataSet = {
     lots: "of data",
   };
   console.log("scheduled job running");
   const job = {
-    time: new Date(),
+    time: new Date().toLocaleString("en-GB"),
     data: largeDataSet,
   };
   arrayOfJobs.push(job);
