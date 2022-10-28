@@ -1,5 +1,4 @@
 const express = require("express");
-
 const schedule = require("node-schedule");
 const app = express();
 const PORT = 3000;
