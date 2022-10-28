@@ -6,7 +6,7 @@ const PORT = 3000;
 
 const arrayOfJobs = [];
 
-schedule.scheduleJob("* */1 * * * *", () => {
+schedule.scheduleJob("0 */1 * * * *", () => {
   const largeDataSet = {
     lots: "of data",
   };
@@ -19,7 +19,7 @@ schedule.scheduleJob("* */1 * * * *", () => {
 });
 
 app.get("/jobs", (req, res) => {
-  res.json(arrayOfJobs);
+  res.json({ lengthOfArray: arrayOfJobs.length, data: arrayOfJobs });
 });
 
 app.listen(PORT, () => {
